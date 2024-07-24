@@ -2,9 +2,13 @@ const express = require("express"); //express 가져옴
 const app = express(); //express 인스턴스 생성
 const port = 3000; //3000번에서 열거임.
 
+import chatRouter from "./chat/chat.js";
+
 app.get("/", (req, res) => {
   res.send("Hello");
 });
+
+app.use("/chat", chatRouter); // /chat으로 오는 모든 요청(use)은 chatRouter가 처리할 거임.
 
 app.listen(port, () => {
   console.log(`
