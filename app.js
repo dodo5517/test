@@ -7,5 +7,9 @@ app.get("/", (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`서버 실행 됨. http://localhost:${port}`);
+  console.log(`
+    ###############################################
+           Server listening on port: ${port}
+    ###############################################
+    `);
 });
