@@ -10,6 +10,9 @@ const router = express.Router();
 router.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/chat/index.html"));
 });
+//css나 js는 변하지 않는 내용이니 정적 파일로 보냄.express.static을 사용하면 서버가 아닌 클라이언트쪽에서 처리함.
+router.use("/css", express.static(path.join(__dirname, "/chat/css")));
+router.use("/js", express.static(path.join(__dirname, "/chat/js")));
 
 //모듈 내보내기.
 export default router;
