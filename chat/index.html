@@ -3,9 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Chat Box</title>
+    <link rel="stylesheet" href="/chat/css/main.css" />
   </head>
   <body>
-    chat
+    <div class="chat-container">
+      <div class="chat-header">
+        <h2>Chat Room</h2>
+      </div>
+      <div class="chat-messages" id="chat-messages">
+        <!-- Sample messages for demonstration -->
+        <div class="message received">
+          <div class="message-content">Hello! How are you?</div>
+        </div>
+        <div class="message sent">
+          <div class="message-content">I'm good, thanks! How about you?</div>
+        </div>
+      </div>
+      <div class="chat-input">
+        <input type="text" id="chat-input" placeholder="Type a message..." />
+        <button id="send-button">Send</button>
+      </div>
+    </div>
   </body>
 </html>

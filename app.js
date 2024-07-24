@@ -8,8 +8,7 @@ const __dirname = path.resolve(); //절대 경로 저장.
 import chatRouter from "./chat/chat.js"; //라우터로 분리한 라우터모듈을 가져옴.
 
 app.get("/", (req, res) => {
-  // res.sendFile(path.join(__dirname, "/index.html"));
-  res.sendFile(path.join(__dirname, "/chat/index.html"));
+  res.sendFile(path.join(__dirname, "/index.html"));
 });
 
 app.use("/chat", chatRouter); // http://localhost:port/chat으로 오는 모든 요청(use)은 chatRouter가 처리할 거임.
