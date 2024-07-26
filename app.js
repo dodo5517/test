@@ -33,6 +33,13 @@ io.on("connection", (socket) => {
     id: socket.id,
   };
 
+  //클라이언트에서 보낸 이벤트 수신 및 처리
+  socket.on("chatMessage", (msg) => {
+    console.log("수신한 메시지:", msg);
+    // 자신을 제외한 클라이언트 모두에게 메시지 전송
+    socket.broadcast.emit("chatMessage", msg);
+  });
+
   //연결을 끊는다면
   socket.on("disconnect", () => {
     console.log("A user disconnected");

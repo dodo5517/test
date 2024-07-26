@@ -27,18 +27,20 @@ body {
   font-size: 1.2em;
 }
 
-.chat-messages {
+.chatMessages {
   flex: 1;
   padding: 20px;
   overflow-y: auto;
   background-color: #f9f9f9;
+  display: flex; /* 수정: 메시지들을 세로로 배치하기 위해 추가 */
+  flex-direction: column; /* 수정: 세로 방향으로 정렬 */
 }
 
-.chat-messages::-webkit-scrollbar {
+.chatMessages::-webkit-scrollbar {
   width: 6px;
 }
 
-.chat-messages::-webkit-scrollbar-thumb {
+.chatMessages::-webkit-scrollbar-thumb {
   background-color: #cccccc;
   border-radius: 10px;
 }
@@ -57,35 +59,39 @@ body {
   justify-content: flex-start;
 }
 
-.message-content {
-  max-width: 60%;
+.message {
+  margin-bottom: 10px;
+  align-items: flex-end;
   padding: 10px 15px;
   border-radius: 20px;
   font-size: 1em;
   line-height: 1.4;
+  word-break: break-word; /* 긴 단어가 있을 경우 줄 바꿈 처리 */
 }
 
-.message.sent .message-content {
+.message.sent {
+  align-self: flex-end;
   background-color: #dcf8c6;
   color: #000;
   border-bottom-right-radius: 0;
 }
 
-.message.received .message-content {
+.message.received {
+  align-self: flex-start;
   background-color: #ffffff;
   color: #000;
   border-bottom-left-radius: 0;
   border: 1px solid #e5e5ea;
 }
 
-.chat-input {
+.chatInput {
   display: flex;
   border-top: 1px solid #eeeeee;
   padding: 10px;
   background-color: #fafafa;
 }
 
-#chat-input {
+#chatInput {
   flex: 1;
   padding: 10px;
   border: 1px solid #dddddd;
@@ -93,7 +99,7 @@ body {
   margin-right: 10px;
 }
 
-#send-button {
+#sendButton {
   background-color: #4caf50;
   color: white;
   border: none;
@@ -103,6 +109,6 @@ body {
   font-size: 1em;
 }
 
-#send-button:hover {
+#sendButton:hover {
   background-color: #45a049;
 }
