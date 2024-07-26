@@ -43,6 +43,8 @@ io.on("connection", (socket) => {
   //연결을 끊는다면
   socket.on("disconnect", () => {
     console.log("A user disconnected");
+    delete user[socket.id];
+    console.log(user);
   });
 });
 
