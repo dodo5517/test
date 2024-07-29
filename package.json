@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "app": "nodemon app.js"
+    "app": "nodemon app.js",
+    "wabpack": "webpack"
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +17,7 @@
   "devDependencies": {
     "nodemon": "^3.1.4",
     "webpack": "^5.93.0",
-    "webpack-cli": "^5.1.4"
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4"
   }
 }
