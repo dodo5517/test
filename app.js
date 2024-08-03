@@ -32,13 +32,27 @@ io.on("connection", (socket) => {
   user[socket.id] = {
     id: socket.id,
   };
+  console.log(user);
 
-  //클라이언트에서 보낸 이벤트 수신 및 처리
-  socket.on("chatMessage", (msg) => {
-    console.log("수신한 메시지:", msg);
-    // 자신을 제외한 클라이언트 모두에게 메시지 전송
-    socket.broadcast.emit("chatMessage", msg);
+  //받은 sdp offer/answer를 다른 클라이언트들에게 보냄.
+  socket.on("sdp", (data) => {
+    console.log("SDP received:", data);
+    socket.broadcast.emit("sdp", data);
   });
+
+  // 받은 ICE candidate를 다른 클라이언트들에게 보냄.
+  socket.on("ice-candidate", (data) => {
+    console.log("ICE Candidate received:", data);
+    socket.broadcast.emit("ice-candidate", data);
+  });
+
+  //socket.io로 메세지 전달.
+  // //클라이언트에서 보낸 메세지 이벤트 처리
+  // socket.on("chatMessage", (msg) => {
+  //   console.log("수신한 메시지:", msg);
+  //   // 자신을 제외한 클라이언트 모두에게 메시지 전송
+  //   socket.broadcast.emit("chatMessage", msg);
+  // });
 
   //연결을 끊는다면
   socket.on("disconnect", () => {
