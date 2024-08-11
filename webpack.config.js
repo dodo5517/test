@@ -4,9 +4,17 @@ const __dirname = path.resolve();
 
 export default {
   mode: "development",
-  entry: "./app.js",
+  entry: "./chat/js/main.js",
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
+  },
   output: {
     filename: "bundle.js",
-    path: path.resolve(__dirname, "public"),
+    path: path.resolve(__dirname, "chat/js/"),
   },
 };

@@ -1,4 +1,10 @@
+import "../css/main.css";
+
+import { io } from "../../node_modules/socket.io/client-dist/socket.io.min.js";
 const socket = io();
+
+let dataChannel;
+
 //구글 공개 stun 사용.
 const configuration = {
   iceServers: [{ urls: "stun:stun.l.google.com:19302" }],
@@ -96,6 +102,7 @@ sendButton.addEventListener("click", () => {
     chatInput.value = "";
   }
 });
+
 createOffer();
 
 //이 밑은 socket.io로 메세지 주고 받기.
