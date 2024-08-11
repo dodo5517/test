@@ -85,12 +85,8 @@ socket.on("ice-candidate", (data) => {
   }
 });
 
-const chatMessages = document.getElementById("chatMessages");
-const sendButton = document.getElementById("sendButton");
-
-//보내기 버튼에 대한 이벤트
-sendButton.addEventListener("click", () => {
-  const chatInput = document.getElementById("chatInput");
+//보내기 함수
+function sendMessage() {
   let msg = chatInput.value;
   console.log(msg);
   if (msg) {
@@ -101,6 +97,20 @@ sendButton.addEventListener("click", () => {
     chatMessages.appendChild(sentDiv);
     chatInput.value = "";
   }
+}
+
+const chatMessages = document.getElementById("chatMessages");
+const sendButton = document.getElementById("sendButton");
+const chatInput = document.getElementById("chatInput");
+
+//보내기 버튼에 대한 이벤트
+sendButton.addEventListener("click", () => {
+  sendMessage();
+});
+
+//메세지 창에서 엔터키 눌러도 보내기 이벤트 발생
+chatInput.addEventListener("keypress", function (e) {
+  if (e.key === "Enter") sendMessage();
 });
 
 createOffer();
