@@ -4,6 +4,10 @@ import { io } from "../../node_modules/socket.io/client-dist/socket.io.min.js";
 const socket = io();
 
 let dataChannel;
+let localStream;
+let remoteStream;
+const localVideo = document.getElementById("localVideo");
+const remoteVideo = document.getElementById("remoteVideo");
 
 //구글 공개 stun 사용.
 const configuration = {
@@ -28,11 +32,34 @@ function setupDataChannel() {
   };
 }
 
+// 로컬 비디오/오디오 스트림 가져오기
+async function getLocalStream() {
+  console.log("getLocalStream");
+  try {
+    localStream = await navigator.mediaDevices.getUserMedia({
+      video: true,
+      audio: true,
+    });
+    // 로컬 비디오 화면에 스트림을 표시
+    localVideo.srcObject = localStream;
+
+    // WebRTC 피어 연결에 로컬 트랙 보냄.
+    localStream.getTracks().forEach((track) => {
+      peerConnection.addTrack(track, localStream);
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 // Offer를 생성하고 전송
 async function createOffer() {
   //chat 채널 생성
   dataChannel = peerConnection.createDataChannel("chat");
   setupDataChannel();
+
+  // 로컬 스트림 가져오기
+  await getLocalStream();
 
   //상대에게 보낼 offer 생성.
   const offer = await peerConnection.createOffer();
@@ -114,6 +141,16 @@ chatInput.addEventListener("keypress", function (e) {
 });
 
 createOffer();
+
+// 원격 스트림 받기
+peerConnection.ontrack = (event) => {
+  // 원격 스트림을 수신하여 remoteVideo에 설정
+  if (!remoteStream) {
+    remoteStream = new MediaStream();
+    remoteVideo.srcObject = remoteStream;
+  }
+  remoteStream.addTrack(event.track);
+};
 
 //이 밑은 socket.io로 메세지 주고 받기.
 //메세지 받기
